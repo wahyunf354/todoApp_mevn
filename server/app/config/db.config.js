@@ -3,7 +3,7 @@ module.exports = {
   HOST: 'localhost',
   USER: 'root',
   PASSWORD: '',
-  DB: 'todo_mevn',
+  DB: 'todos_mevn',
   DIALECT: 'mysql',
   pool: {
     max: 5,

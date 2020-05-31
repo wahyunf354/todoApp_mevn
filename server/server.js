@@ -1,9 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const db = require('./app/models')
 
 // define express
 const app = express()
+
+// generate table in db
+db.sequelize.sync()
 
 // define list url parmission cors
 const whiteList = [
@@ -29,7 +33,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // define try route in server
-app.get('/', (res, req) => {
+app.get('/', (req, res) => {
   res.json({
     message: 'Welcome To MEVN'
   })
