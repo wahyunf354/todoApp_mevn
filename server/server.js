@@ -39,6 +39,9 @@ app.get('/', (req, res) => {
   })
 })
 
+// Define Router
+require('./app/routers/todo.routes.js')(app)
+
 // define port url
 const PORT = process.env.PORT || 8080
 
