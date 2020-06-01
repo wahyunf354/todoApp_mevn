@@ -8,11 +8,11 @@ module.exports = (app) => {
   // Find all todo
   router.get('/', todo.findAll)
 
-  // Find todo by id
-  router.get('/:id', todo.findById)
-
   // Find todo by uncompleted
   router.get('/uncompleted', todo.findByUnCompleted)
+
+  // Find todo by id
+  router.get('/:id', todo.findById)
 
   // update todo
   router.put('/:id', todo.update)

@@ -70,10 +70,10 @@ exports.findById = (req, res) => {
 exports.findByUnCompleted = (req, res) => {
   Todo.findAll({ where: { isCompleted: false } })
     .then(result => {
-      res.status(200).res.send({ data: result, message: 'Get Success' })
+      res.status(200).send({ data: result, message: 'Get Success' })
     })
     .catch(err => {
-      res.status(500).res.send({ message: err.message || 'Some error occured retrieving todos' })
+      res.status(500).send({ message: err.message || 'Some error occured retrieving todos' })
     })
 }
 
