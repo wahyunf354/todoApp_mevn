@@ -11,6 +11,12 @@ module.exports = (app) => {
   // Find todo by id
   router.get('/:id', todo.findById)
 
+  // Find todo by uncompleted
+  router.get('/uncompleted', todo.findByUnCompleted)
+
+  // update todo
+  router.put('/:id', todo.update)
+
   // delete by id
   router.delete('/:id', todo.deleteById)
 

@@ -66,6 +66,48 @@ exports.findById = (req, res) => {
     }))
 }
 
+// Find Todo UnCompleted
+exports.findByUnCompleted = (req, res) => {
+  Todo.findAll({ where: { isCompleted: false } })
+    .then(result => {
+      res.status(200).res.send({ data: result, message: 'Get Success' })
+    })
+    .catch(err => {
+      res.status(500).res.send({ message: err.message || 'Some error occured retrieving todos' })
+    })
+}
+
+// Method Update
+exports.update = (req, res) => {
+  const { id } = req.params
+  const todo = {
+    title: req.body.title,
+    description: req.body.description,
+    priority: req.body.priority,
+    isCompleted: req.body.isCompleted
+  }
+
+  Todo.update(todo, { where: { id } })
+    .then(result => {
+      if (result[0] === 1) {
+        res.status(200).send({
+          message: 'Success Update Todo',
+          result,
+          data: todo
+        })
+      } else {
+        res.send({
+          message: 'Todo not Found'
+        })
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || 'Error update Data'
+      })
+    })
+}
+
 // Method Delete
 exports.deleteById = (req, res) => {
   const { id } = req.params
