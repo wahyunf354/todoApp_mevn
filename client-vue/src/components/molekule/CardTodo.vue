@@ -1,12 +1,17 @@
 <template>
   <div class="card__container">
-    <div class="card__text">
-      <p class="card__title">Title Todo</p>
-      <p class="card__time">2010/8/8</p>
-      <p class="card__desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+    <div class="card__text" @click="getDelete()">
+      <p class="card__title">{{ title }}</p>
+      <p class="card__time">{{ updatedAt }}</p>
+      <p class="card__desc">{{ description }}</p>
     </div>
     <div class="card__btn">
       <Button title="View" />
+      <div class="card__btn_delete">
+        <img src="../../assets/icon/delete.svg" alt="">
+      </div>
+      <div class="helper">
+      </div>
     </div>
   </div>
 </template>
@@ -18,6 +23,14 @@ export default {
   name: 'CardTodo',
   components: {
     Button
+  },
+  props: ['title', 'description', 'updatedAt'],
+  methods: {
+    getDelete () {
+      document.querySelectorAll('.helper').forEach((e, i) => {
+        e.classList.add('space')
+      })
+    }
   }
 }
 </script>
@@ -38,13 +51,38 @@ export default {
     justify-content: space-between;
     margin-bottom: 12px;
 
+    .card__btn {
+      position: relative;
+      width: 30%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .card__btn_delete {
+        width: 69px;
+        height: 69px;
+        background: rgba(85, 98, 150, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        opacity: 0;
+      }
+
+      .space {
+        width: 75px;
+        height: 69px;
+      }
+    }
+
     .card__text {
+      width: 70%;
       .card__title {
         font-family: Poppins;
         font-style: normal;
         font-weight: normal;
         font-size: 18px;
-        line-height: 27px;
+        line-height: 30px;
         color: white
       }
 
@@ -53,7 +91,7 @@ export default {
         font-style: normal;
         font-weight: 500;
         font-size: 10px;
-        line-height: 13px;
+        line-height: 15px;
         color: $text-dark;
       }
 

@@ -136,11 +136,11 @@ $text-dark: #556296;
   }
 
   .navbar__sidebar.hidden {
-    left: -865px;
+    right: -1000px;
   }
 
   .navbar__sidebar.show {
-    left: -565px;
+    right: -10px;
   }
 
   .navbar__sidebar {
