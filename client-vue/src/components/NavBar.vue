@@ -2,8 +2,11 @@
   <div id="nav">
 
       <!-- Mobile Nav -->
-      <div class="menu" @click="getSideBar()">
+      <div class="menu" @click="getSideBar()" v-if="isDisplay" >
         <img  src="../assets/icon/menu.png" alt="">
+      </div>
+      <div class="menu" v-else>
+        <img  src="../assets/icon/back.svg" alt="">
       </div>
 
       <div class="sidebar hidden">
@@ -18,7 +21,7 @@
         <router-link to="/">Todos Priority Low</router-link>
       </div>
 
-      <router-link to="/add">
+      <router-link to="/add" v-if="isDisplay">
         <div class="add__btn">
           <img src="../assets/icon/btn+.svg" alt="">
         </div>
@@ -29,10 +32,15 @@
       <!-- Desktop Nav -->
 
       <div class="navbar">
+        <router-link class="navbar__btn" to="/" v-if="!isDisplay">
+          <img src="../assets/icon/back.svg" alt="">
+        </router-link>
+        <div class="navbar__btn" v-else></div>
         <p @click="getSideBarDesktop()" >Menu</p>
-        <router-link class="navbar__btn" to="/add">
+        <router-link class="navbar__btn" to="/add" v-if="isDisplay">
           <img src="../assets/icon/btn+.svg" alt="">
         </router-link>
+        <div class="navbar__btn" v-else></div>
         <div class="navbar__sidebar hidden">
           <div class="btnx" @click="hiddenSideBarDesktop()">
             <img src="../assets/icon/btnx.svg" alt="">
@@ -45,7 +53,6 @@
           <router-link to="/">Todos Priority Low</router-link>
         </div>
       </div>
-
       <!-- End Desktop Nav -->
     </div>
 </template>
@@ -70,6 +77,9 @@ export default {
       document.querySelector('.navbar__sidebar').classList.remove('show')
       document.querySelector('.navbar__sidebar').classList.add('hidden')
     }
+  },
+  props: {
+    isDisplay: Boolean
   }
 }
 </script>
@@ -114,7 +124,7 @@ $text-dark: #556296;
   }
 
   .navbar {
-    width: 50%;
+    width: 100%;
     margin: 0;
     position: relative;
     padding: 0;

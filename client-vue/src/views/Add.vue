@@ -1,5 +1,21 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="add__container">
+    <NavBar :isDisplay="isDisplayBtnAdd" />
   </div>
 </template>
+
+<script>
+import NavBar from '../components/NavBar'
+
+export default {
+  name: 'Add',
+  data () {
+    return {
+      isDisplayBtnAdd: false
+    }
+  },
+  components: {
+    NavBar
+  }
+}
+</script>
