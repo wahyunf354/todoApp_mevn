@@ -44,7 +44,7 @@ export default {
   $text-dark: #556296;
 
   .card__container {
-    width: 50%;
+    width: 100%;
     border-bottom: 1px solid $text-dark;
     display: flex;
     align-items: center ;
