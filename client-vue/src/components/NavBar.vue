@@ -18,9 +18,11 @@
         <router-link to="/">Todos Priority Low</router-link>
       </div>
 
-      <div class="add__btn">
+      <router-link to="/add">
+        <div class="add__btn">
           <img src="../assets/icon/btn+.svg" alt="">
-      </div>
+        </div>
+      </router-link>
 
       <!-- End Mobile Nav -->
 
@@ -28,7 +30,7 @@
 
       <div class="navbar">
         <p @click="getSideBarDesktop()" >Menu</p>
-        <router-link class="navbar__btn" to="/">
+        <router-link class="navbar__btn" to="/add">
           <img src="../assets/icon/btn+.svg" alt="">
         </router-link>
         <div class="navbar__sidebar hidden">
