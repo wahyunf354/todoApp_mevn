@@ -5,7 +5,7 @@
       <div class="menu" @click="getSideBar()" v-if="isDisplay" >
         <img  src="../assets/icon/menu.png" alt="">
       </div>
-      <div class="menu" v-else>
+      <div class="menu" v-else @click="pushBack()">
         <img  src="../assets/icon/back.svg" alt="">
       </div>
 
@@ -26,11 +26,9 @@
           <img src="../assets/icon/btn+.svg" alt="">
         </div>
       </router-link>
-
       <!-- End Mobile Nav -->
 
       <!-- Desktop Nav -->
-
       <div class="navbar">
         <router-link class="navbar__btn" to="/" v-if="!isDisplay">
           <img src="../assets/icon/back.svg" alt="">
@@ -76,6 +74,9 @@ export default {
     hiddenSideBarDesktop () {
       document.querySelector('.navbar__sidebar').classList.remove('show')
       document.querySelector('.navbar__sidebar').classList.add('hidden')
+    },
+    pushBack () {
+      this.$router.push('/')
     }
   },
   props: {
@@ -135,6 +136,12 @@ $text-dark: #556296;
     a.navbar__btn {
       width: 20px;
       height: 20px;
+      padding: {
+        top: 0;
+        left: 20px;
+        bottom: 0;
+        right: 20px;
+      }
     }
 
     p {
@@ -198,6 +205,10 @@ $text-dark: #556296;
       &.router-link-exact-active {
         color: #A0B3F4;
       }
+    }
+
+    .menu {
+      cursor: pointer;
     }
 
     .navbar {

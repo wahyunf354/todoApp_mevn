@@ -1,11 +1,13 @@
 <template>
   <div class="add__container">
     <NavBar :isDisplay="isDisplayBtnAdd" />
+    <AddContent/>
   </div>
 </template>
 
 <script>
 import NavBar from '../components/NavBar'
+import AddContent from '../components/AddContent'
 
 export default {
   name: 'Add',
@@ -15,7 +17,8 @@ export default {
     }
   },
   components: {
-    NavBar
+    NavBar,
+    AddContent
   }
 }
 </script>
