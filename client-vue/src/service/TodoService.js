@@ -8,6 +8,10 @@ class TodoService {
   postTodo (data) {
     return http.post('/todo', data)
   }
+
+  deleteTodo (id) {
+    return http.delete(`/todo/${id}`)
+  }
 }
 
 export default new TodoService()

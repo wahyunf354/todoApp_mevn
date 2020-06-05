@@ -5,7 +5,7 @@
         <p>Todos</p>
       </div>
       <div class="content" v-for="(todo,i) in this.todos" :key="i" >
-        <CardTodo :title='todo.title' :updatedAt='todo.updatedAt' :description='todo.description' />
+        <CardTodo :id='todo.id' :title='todo.title' :updatedAt='todo.updatedAt' :description='todo.description' />
       </div>
     </div>
     <div class="alltodo__illustration">

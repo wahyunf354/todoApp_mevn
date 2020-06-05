@@ -23,10 +23,12 @@
         <img src="../assets/illustration/illustrationadd.svg" alt="">
       </div>
     </div>
-    <div class="popup" v-if="isDisplayPopup" @click="hiddenPopup()">
-      <p v-if="error.isError" class="popup__text_red">{{ error.message }}</p>
-      <p v-else class="popup__text">Create Todo Successfully</p>
-    </div>
+    <transition name="fade">
+      <div class="popup" v-if="isDisplayPopup" @click="hiddenPopup()">
+        <p v-if="error.isError" class="popup__text_red">{{ error.message }}</p>
+        <p v-else class="popup__text">Create Todo Successfully</p>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -90,6 +92,15 @@ export default {
 </script>
 
 <style lang="scss">
+  .fade-enter-active, .fade-leave-active {
+    transition: .3s;
+  }
+
+  .fade-enter, .fade-leave-to  {
+    opacity: 0;
+    transform: scale(0);
+  }
+
   div {
     .add__content {
       display: flex;
@@ -161,7 +172,7 @@ export default {
     }
     .popup {
       position: absolute;
-      background-color: rgba($color: #273054, $alpha: 0.75);
+      background-color: rgba($color: #273054, $alpha: 0.5);
       top: 0;
       bottom: 0;
       left: 0;

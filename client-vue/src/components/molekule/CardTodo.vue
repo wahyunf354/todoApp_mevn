@@ -1,35 +1,40 @@
 <template>
-  <div class="card__container">
-    <div class="card__text" @click="getDelete()">
+  <div class="card__container" @click="isDelete = !isDelete">
+    <div class="card__text">
       <p class="card__title">{{ title }}</p>
       <p class="card__time">{{ updatedAt }}</p>
       <p class="card__desc">{{ description }}</p>
     </div>
     <div class="card__btn">
       <Button title="View" />
-      <!-- <div class="card__btn_delete">
-        <img src="../../assets/icon/delete.svg" alt="">
-      </div>
-      <div class="helper"> -->
-      </div>
+      <transition name="fade">
+        <div class="card__btn_delete" v-if="isDelete" @click="deleteTodo(id)">
+          <img src="../../assets/icon/delete.svg" alt="">
+        </div>
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
 import Button from '../atom/Button'
+import TodoService from '../../service/TodoService'
 
 export default {
   name: 'CardTodo',
+  data () {
+    return {
+      isDelete: false
+    }
+  },
   components: {
     Button
   },
-  props: ['title', 'description', 'updatedAt'],
+  props: ['title', 'description', 'updatedAt', 'id'],
   methods: {
-    getDelete () {
-      document.querySelectorAll('.helper').forEach((e, i) => {
-        e.classList.add('space')
-      })
+    deleteTodo (id) {
+      TodoService.deleteTodo(id)
+      // TODO: .than
     }
   }
 }
@@ -43,6 +48,13 @@ export default {
   $text-smout: #A0B3F4;
   $text-dark: #556296;
 
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 700ms;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active di bawah versi 2.1.8 */ {
+    opacity: 0;
+  }
+
   .card__container {
     width: 100%;
     border-bottom: 1px solid $text-dark;
@@ -50,6 +62,8 @@ export default {
     align-items: center ;
     justify-content: space-between;
     margin-bottom: 12px;
+    overflow: hidden;
+    padding-right: 5px;
 
     .card__btn {
       position: relative;
@@ -59,19 +73,21 @@ export default {
       align-items: center;
 
       .card__btn_delete {
-        width: 69px;
-        height: 69px;
+        width: 65.5px;
+        height: 65.5px;
+        margin-left: 8px;
         background: rgba(85, 98, 150, 0.5);
         display: flex;
         justify-content: center;
         align-items: center;
-        position: absolute;
-        opacity: 0;
-      }
-
-      .space {
-        width: 75px;
-        height: 69px;
+        cursor: pointer;
+        transition: all 300ms;
+        img {
+          transition: all 300ms;
+        }
+        &:hover img {
+          transform: scale(1.3);
+        }
       }
     }
 

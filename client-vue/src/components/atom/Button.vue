@@ -24,6 +24,11 @@ export default {
     font-weight: normal;
     font-size: 14px;
     line-height: 21px;
-    color: white
+    color: white;
+    transition: all 300ms;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 </style>
