@@ -69,8 +69,8 @@ export default {
   .alltodo__illustration {
     flex: 1;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-content: flex-start;
     padding: 30px 0;
     box-sizing: border-box;
 

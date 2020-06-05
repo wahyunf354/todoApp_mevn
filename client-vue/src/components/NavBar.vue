@@ -138,7 +138,7 @@ $text-dark: #556296;
       height: 20px;
       padding: {
         top: 0;
-        left: 20px;
+        left: 50px;
         bottom: 0;
         right: 20px;
       }
@@ -186,6 +186,16 @@ $text-dark: #556296;
 
     a {
       border-bottom: solid 1px $text-smout;
+    }
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .navbar {
+    a.navbar__btn {
+      padding: {
+        left: 20px
+      };
     }
   }
 }

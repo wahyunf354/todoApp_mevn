@@ -13,6 +13,7 @@ export default {
 
 <style lang="scss">
   button {
+    cursor: pointer;
     padding: 2px 13px;
     background: #6268F1;
     outline: none;

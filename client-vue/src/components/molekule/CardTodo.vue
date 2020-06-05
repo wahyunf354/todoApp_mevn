@@ -7,10 +7,10 @@
     </div>
     <div class="card__btn">
       <Button title="View" />
-      <div class="card__btn_delete">
+      <!-- <div class="card__btn_delete">
         <img src="../../assets/icon/delete.svg" alt="">
       </div>
-      <div class="helper">
+      <div class="helper"> -->
       </div>
     </div>
   </div>

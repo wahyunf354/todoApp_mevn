@@ -24,7 +24,7 @@ $text-dark: #556296;
 }
 
 body {
-  overflow: hidden;
+  overflow-x: hidden;
   font-family: Poppins, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
