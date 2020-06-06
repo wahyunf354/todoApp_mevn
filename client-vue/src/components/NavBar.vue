@@ -109,6 +109,12 @@ $text-dark: #556296;
     }
   }
 
+  .add__btn {
+    transition: all 400ms;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
 }
 
 @media (min-width: 544px) {
@@ -186,6 +192,10 @@ $text-dark: #556296;
 
     a {
       border-bottom: solid 1px $text-smout;
+      transition: all 400ms;
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 }
@@ -219,6 +229,10 @@ $text-dark: #556296;
 
     .menu {
       cursor: pointer;
+      transition: all 400ms;
+      &:hover {
+        transform: scale(1.1) ;
+      }
     }
 
     .navbar {
@@ -252,12 +266,21 @@ $text-dark: #556296;
         height: 20px;
         margin-bottom: 30px;
         margin-top: 10px;
+        cursor: pointer;
+        transition: all 400ms;
+        &:hover {
+          transform: translate(0px, -5px);
+        }
       }
 
       a {
         padding-bottom: 4px;
-        border-bottom: solid 1px $text-smout;
         margin-bottom: 27px;
+        border-bottom: solid 1px $text-smout;
+        transition: all 400ms;
+        &:hover {
+          transform: scale(1.1);
+        }
       }
     }
 

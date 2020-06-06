@@ -5,6 +5,10 @@ class TodoService {
     return http.get('/todo')
   }
 
+  getByPriority (priority) {
+    return http.get(`/todo/${priority}`)
+  }
+
   postTodo (data) {
     return http.post('/todo', data)
   }

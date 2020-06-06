@@ -77,6 +77,21 @@ exports.findByUnCompleted = (req, res) => {
     })
 }
 
+// Find Todo Priority
+exports.findPriority = (req, res) => {
+  Todo.findAll({ where: { priority: req.params.priority } })
+    .then((result) => {
+      if (result.length !== 0) {
+        res.status(200).send(result)
+      } else {
+        res.status(404).send({ message: 'Todo not Found' })
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({ error: err })
+    })
+}
+
 // Method Update
 exports.update = (req, res) => {
   const { id } = req.params

@@ -11,6 +11,9 @@ module.exports = (app) => {
   // Find todo by uncompleted
   router.get('/uncompleted', todo.findByUnCompleted)
 
+  // Find todo by priority
+  router.get('/:priority', todo.findPriority)
+
   // Find todo by id
   router.get('/:id', todo.findById)
 

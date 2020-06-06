@@ -154,6 +154,10 @@ export default {
           position: absolute;
           cursor: pointer;
           z-index: -2;
+          transition: all 400ms;
+          &:hover {
+            transform: scale(1.1);
+          }
         }
       }
       .add__illustration {

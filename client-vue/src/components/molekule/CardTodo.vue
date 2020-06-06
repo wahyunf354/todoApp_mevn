@@ -8,7 +8,7 @@
     <div class="card__btn">
       <Button title="View" />
       <transition name="fade">
-        <div class="card__btn_delete" v-if="isDelete" @click="deleteTodo(id)">
+        <div class="card__btn_delete" v-if="isDelete" @click="handleDelete(id)">
           <img src="../../assets/icon/delete.svg" alt="">
         </div>
       </transition>
@@ -18,7 +18,6 @@
 
 <script>
 import Button from '../atom/Button'
-import TodoService from '../../service/TodoService'
 
 export default {
   name: 'CardTodo',
@@ -30,13 +29,7 @@ export default {
   components: {
     Button
   },
-  props: ['title', 'description', 'updatedAt', 'id'],
-  methods: {
-    deleteTodo (id) {
-      TodoService.deleteTodo(id)
-      // TODO: .than
-    }
-  }
+  props: ['title', 'description', 'updatedAt', 'handleDelete', 'id']
 }
 </script>
 

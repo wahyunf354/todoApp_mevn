@@ -4,8 +4,11 @@
       <div class="title">
         <p>Todos</p>
       </div>
-      <div class="content" v-for="(todo,i) in this.todos" :key="i" >
-        <CardTodo :id='todo.id' :title='todo.title' :updatedAt='todo.updatedAt' :description='todo.description' />
+      <div class="content"  v-for="(todo,i) in this.todos" :key="i" >
+        <CardTodo :handleDelete='handleDeleteTodo' :id='todo.id' :title='todo.title' :updatedAt='todo.updatedAt' :description='todo.description' />
+      </div>
+      <div class="empty__text" v-if="isEmpty">
+        <p>Todo Not Found</p>
       </div>
     </div>
     <div class="alltodo__illustration">
@@ -22,7 +25,8 @@ export default {
   name: 'AllTodos',
   data () {
     return {
-      todos: []
+      todos: [],
+      isEmpty: false
     }
   },
   components: {
@@ -33,8 +37,23 @@ export default {
       TodoService.getAll()
         .then(result => {
           this.todos = result.data
+          if (this.todos.length === 0) {
+            this.isEmpty = true
+          } else {
+            this.isEmpty = false
+          }
         })
         .catch(err => {
+          console.log(err)
+        })
+    },
+    handleDeleteTodo (id) {
+      TodoService.deleteTodo(id)
+        .then((result) => {
+          console.log(result)
+          this.readAllTodo()
+        })
+        .catch((err) => {
           console.log(err)
         })
     }
