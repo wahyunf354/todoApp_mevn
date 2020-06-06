@@ -1,7 +1,7 @@
 <template>
   <div class="alltodo__content">
     <div class="title">
-      <p>Todos</p>
+      <p>Todos Priority {{ $route.params.priority.trim().replace(/^\w/, (c) => c.toUpperCase()) }}</p>
     </div>
     <div class="content"  v-for="(todo,i) in this.todos" :key="i" >
       <CardTodo :handleDelete='handleDeleteTodo' :id='todo.id' :title='todo.title' :updatedAt='todo.updatedAt' :description='todo.description' />
@@ -45,7 +45,6 @@ export default {
     handleDeleteTodo (id) {
       TodoService.deleteTodo(id)
         .then((result) => {
-          console.log(result)
           this.readAllTodo()
         })
         .catch((err) => {

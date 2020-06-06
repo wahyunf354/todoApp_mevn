@@ -9,6 +9,10 @@ class TodoService {
     return http.get(`/todo/${priority}`)
   }
 
+  getById (id) {
+    return http.get(`/todo/edit/${id}`)
+  }
+
   postTodo (data) {
     return http.post('/todo', data)
   }

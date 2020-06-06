@@ -2,7 +2,7 @@
   <div>
     <div class="add__content">
       <div class="add__form">
-        <p class="add__title">Create Todo</p>
+        <p class="add__title">Edit Todo</p>
         <input v-model="todo.title" class="add__input" name="title" type="text" placeholder="Title">
         <textarea v-model="todo.description" class="add__textarea" name="description" id="" cols="30" rows="8" placeholder="Add Todo Here"></textarea>
         <div class="add__radio-group">
@@ -20,8 +20,8 @@
             <input id="high" v-model="todo.priority" type="radio" class="add__radio" name="priority" value="high">High
           </label>
         </div>
-        <div @click="createTodo()" class="add__btn-create">
-          <img src="../assets/icon/btn+40x40.svg" alt="create">
+        <div @click="updateTodo()" class="add__btn-create">
+          <img src="../assets/icon/save.svg" alt="create">
         </div>
       </div>
       <div class="add__illustration">
@@ -44,12 +44,7 @@ export default {
   name: 'addcontent',
   data () {
     return {
-      todo: {
-        title: '',
-        description: '',
-        priority: 'medium',
-        isCompleted: false
-      },
+      todo: {},
       isDisplayPopup: false,
       error: {
         message: '',
@@ -58,40 +53,22 @@ export default {
     }
   },
   methods: {
-    createTodo () {
-      const data = {
-        title: this.todo.title,
-        description: this.todo.description,
-        priority: this.todo.priority,
-        isCompleted: this.todo.isCompleted
-      }
-
-      if (data.title !== '' && data.description !== '') {
-        TodoService.postTodo(data)
-          .then(() => {
-            this.isDisplayPopup = true
-            this.error.isError = false
-            this.todo = {
-              title: '',
-              description: '',
-              priority: 'medium',
-              isCompleted: false
-            }
-          })
-          .catch((err) => {
-            this.error.message = err
-            this.error.isError = true
-            this.isDisplayPopup = true
-          })
-      } else {
-        this.isDisplayPopup = true
-        this.error.message = 'Mush not be empty'
-        this.error.isError = true
-      }
+    getTodoById (id) {
+      TodoService.getById(id)
+        .then((result) => {
+          console.log(result)
+          this.todo = result.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     hiddenPopup () {
       this.isDisplayPopup = false
     }
+  },
+  mounted () {
+    this.getTodoById(this.$route.params.id)
   }
 }
 </script>

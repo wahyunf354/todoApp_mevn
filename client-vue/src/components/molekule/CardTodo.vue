@@ -5,7 +5,7 @@
       <p class="card__time">{{ updatedAt }}</p>
       <p class="card__desc">{{ description }}</p>
     </div>
-    <div class="card__btn">
+    <div class="card__btn"  >
       <Button title="View" />
       <transition name="fade">
         <div class="card__btn_delete" v-if="isDelete" @click="handleDelete(id)">

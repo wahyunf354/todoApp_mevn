@@ -15,7 +15,7 @@ module.exports = (app) => {
   router.get('/:priority', todo.findPriority)
 
   // Find todo by id
-  router.get('/:id', todo.findById)
+  router.get('/edit/:id', todo.findById)
 
   // update todo
   router.put('/:id', todo.update)

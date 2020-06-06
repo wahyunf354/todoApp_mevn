@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Add from '../views/Add.vue'
+import Edit from '../views/Edit.vue'
 import TodoByPriority from '../components/TodoByPrority.vue'
 import AllTodos from '../components/AllTodos.vue'
 
@@ -27,6 +28,10 @@ const routes = [
     path: '/add',
     name: 'add',
     component: Add
+  },
+  {
+    path: '/edit/:id',
+    component: Edit
   }
 ]
 

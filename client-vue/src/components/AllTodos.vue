@@ -45,7 +45,6 @@ export default {
     handleDeleteTodo (id) {
       TodoService.deleteTodo(id)
         .then((result) => {
-          console.log(result)
           this.readAllTodo()
         })
         .catch((err) => {

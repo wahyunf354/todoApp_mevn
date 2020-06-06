@@ -81,11 +81,7 @@ exports.findByUnCompleted = (req, res) => {
 exports.findPriority = (req, res) => {
   Todo.findAll({ where: { priority: req.params.priority } })
     .then((result) => {
-      if (result.length !== 0) {
-        res.status(200).send(result)
-      } else {
-        res.status(404).send({ message: 'Todo not Found' })
-      }
+      res.status(200).send(result)
     })
     .catch((err) => {
       res.status(500).send({ error: err })
