@@ -1,32 +1,36 @@
 <template>
   <div>
-    <div class="add__content">
-      <div class="add__form">
-        <p class="add__title">Edit Todo</p>
-        <input v-model="todo.title" class="add__input" name="title" type="text" placeholder="Title">
-        <textarea v-model="todo.description" class="add__textarea" name="description" id="" cols="30" rows="8" placeholder="Add Todo Here"></textarea>
-        <div class="add__radio-group">
+    <div class="edit__content"  v-if="!error.isError">
+      <div class="edit__form">
+        <p class="edit__title">Edit Todo</p>
+        <input v-model="todo.title" class="edit__input" name="title" type="text" placeholder="Title">
+        <textarea v-model="todo.description" class="edit__textarea" name="description" id="" cols="30" rows="8" placeholder="edit Todo Here"></textarea>
+        <div class="edit__radio-group">
           <label for="low">
-            <input id="low" v-model="todo.priority" type="radio" class="add__radio" name="priority" value="low">Low
+            <input id="low" v-model="todo.priority" type="radio" class="edit__radio" name="priority" value="low">Low
           </label>
         </div>
-        <div class="add__radio-group">
+        <div class="edit__radio-group">
           <label for="medium">
-            <input id="medium" v-model="todo.priority" type="radio" class="add__radio" name="priority" value="medium">Medium
+            <input id="medium" v-model="todo.priority" type="radio" class="edit__radio" name="priority" value="medium">Medium
           </label>
         </div>
-        <div class="add__radio-group">
+        <div class="edit__radio-group">
           <label for="high">
-            <input id="high" v-model="todo.priority" type="radio" class="add__radio" name="priority" value="high">High
+            <input id="high" v-model="todo.priority" type="radio" class="edit__radio" name="priority" value="high">High
           </label>
         </div>
-        <div @click="updateTodo()" class="add__btn-create">
+        <div @click="updateTodo()" class="edit__btn-create">
           <img src="../assets/icon/save.svg" alt="create">
         </div>
       </div>
-      <div class="add__illustration">
+      <div class="edit__illustration">
         <img src="../assets/illustration/illustrationadd.svg" alt="">
       </div>
+    </div>
+    <div v-else class="edit__not-found">
+      <img src="../assets/illustration/illustration404.svg" alt="">
+      <p>{{ error.message }}</p>
     </div>
     <transition name="fade">
       <div class="popup" v-if="isDisplayPopup" @click="hiddenPopup()">
@@ -56,8 +60,12 @@ export default {
     getTodoById (id) {
       TodoService.getById(id)
         .then((result) => {
-          console.log(result)
-          this.todo = result.data
+          if (result.data.message === 'Todo is not found') {
+            this.error.message = result.data.message
+            this.error.isError = true
+          } else {
+            this.todo = result.data
+          }
         })
         .catch((err) => {
           console.log(err)
@@ -84,9 +92,23 @@ export default {
   }
 
   div {
-    .add__content {
+    .edit__not-found {
+      height: 80vh;
+      width: 100%;
       display: flex;
-      .add__form {
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      img {
+        margin-bottom: 20px;
+      }
+      p {
+        font-size: 20px
+      }
+    }
+    .edit__content {
+      display: flex;
+      .edit__form {
         padding: {
           top: 30px;
           left: 60px;
@@ -94,7 +116,7 @@ export default {
         flex: 1;
         display: flex;
         flex-direction: column;
-        .add__title {
+        .edit__title {
           font-family: Poppins;
           font-style: normal;
           font-weight: bold;
@@ -102,7 +124,7 @@ export default {
           line-height: 36px;
           margin-bottom: 41px;
         }
-        .add__input {
+        .edit__input {
           background-color: rgba($color: #000000, $alpha: 0);
           border: 1px solid rgba($color: #000000, $alpha: 0);
           font-family: Poppins;
@@ -111,7 +133,7 @@ export default {
           padding: 5px 0;
           color: #A0B3F4;
         }
-        .add__textarea {
+        .edit__textarea {
           background-color: rgba($color: #000000, $alpha: 0);
           border: 1px solid rgba($color: #000000, $alpha: 0);
           font-size: 14px;
@@ -120,15 +142,15 @@ export default {
           outline: none;
           font-family: Poppins;
         }
-        .add__radio-group {
+        .edit__radio-group {
           padding: {
             top: 10px;
           };
-          .add__radio {
+          .edit__radio {
             margin-right: 10px;
           }
         }
-        .add__btn-create {
+        .edit__btn-create {
           width: 40px;
           height: 40px;
           right: 40px;
@@ -142,7 +164,7 @@ export default {
           }
         }
       }
-      .add__illustration {
+      .edit__illustration {
         flex: 1;
         display: flex;
         align-items: center;
@@ -183,12 +205,17 @@ export default {
 
   @media screen and (max-width: 765px) {
     div {
-      .add__content {
+      .edit__not-found {
+        img {
+          width: 80%;
+        }
+      }
+      .edit__content {
         margin: {
           top: 20px;
         };
         display: flex;
-        .add__form {
+        .edit__form {
           padding: {
             top: 0;
             left: 30px;
@@ -198,7 +225,7 @@ export default {
           display: flex;
           flex-direction: column;
         }
-        .add__illustration {
+        .edit__illustration {
           display: none;
         }
       }
