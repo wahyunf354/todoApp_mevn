@@ -9,16 +9,14 @@
         <img  src="../assets/icon/back.svg" alt="">
       </div>
 
-      <div class="sidebar hidden">
+      <div class="sidebar hidden" @click="hiddenSideBar()">
         <div class="btnx" @click="hiddenSideBar()">
           <img src="../assets/icon/btnx.svg" alt="">
         </div>
         <router-link to="/">All Todos</router-link>
-        <router-link to="/">Todos Uncompleted</router-link>
-        <router-link to="/">Todos Completed</router-link>
-        <router-link to="/">Todos Priority High</router-link>
-        <router-link to="/">Todos Priority Medium</router-link>
-        <router-link to="/">Todos Priority Low</router-link>
+        <router-link to="/priority/high">Todos Priority High</router-link>
+        <router-link to="/priority/medium">Todos Priority Medium</router-link>
+        <router-link to="/priority/low">Todos Priority Low</router-link>
       </div>
 
       <router-link to="/add" v-if="isDisplay">
@@ -44,11 +42,9 @@
             <img src="../assets/icon/btnx.svg" alt="">
           </div>
           <router-link to="/">All Todos</router-link>
-          <router-link to="/">Todos Uncompleted</router-link>
-          <router-link to="/">Todos Completed</router-link>
-          <router-link to="/">Todos Priority High</router-link>
-          <router-link to="/">Todos Priority Medium</router-link>
-          <router-link to="/">Todos Priority Low</router-link>
+          <router-link to="/priority/high">Todos Priority High</router-link>
+          <router-link to="/priority/medium">Todos Priority Medium</router-link>
+          <router-link to="/priority/low">Todos Priority Low</router-link>
         </div>
       </div>
       <!-- End Desktop Nav -->

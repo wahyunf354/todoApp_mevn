@@ -17,7 +17,7 @@ import CardTodo from './molekule/CardTodo'
 import TodoService from '../service/TodoService.js'
 
 export default {
-  name: 'AllTodos',
+  name: 'TodoByPriorityLow',
   data () {
     return {
       todos: [],
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     readAllTodo () {
-      TodoService.getAll()
+      TodoService.getByPriority(this.$route.params.priority)
         .then(result => {
           this.todos = result.data
           if (this.todos.length === 0) {
@@ -54,6 +54,9 @@ export default {
     }
   },
   mounted () {
+    this.readAllTodo()
+  },
+  updated () {
     this.readAllTodo()
   }
 }
