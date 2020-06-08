@@ -20,6 +20,10 @@ class TodoService {
   deleteTodo (id) {
     return http.delete(`/todo/${id}`)
   }
+
+  editTodo (id, data) {
+    return http.put(`/todo/${id}`, data)
+  }
 }
 
 export default new TodoService()

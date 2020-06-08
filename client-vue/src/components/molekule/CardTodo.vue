@@ -6,7 +6,9 @@
       <p class="card__desc">{{ description }}</p>
     </div>
     <div class="card__btn"  >
-      <Button title="View" />
+      <router-link :to="{ name: 'edit', params: { id } }">
+        <Button title="View"/>
+      </router-link>
       <transition name="fade">
         <div class="card__btn_delete" v-if="isDelete" @click="handleDelete(id)">
           <img src="../../assets/icon/delete.svg" alt="">

@@ -20,7 +20,7 @@
             <input id="high" v-model="todo.priority" type="radio" class="edit__radio" name="priority" value="high">High
           </label>
         </div>
-        <div @click="updateTodo()" class="edit__btn-create">
+        <div @click="hendleTodoSave()" class="edit__btn-create">
           <img src="../assets/icon/save.svg" alt="create">
         </div>
       </div>
@@ -30,12 +30,11 @@
     </div>
     <div v-else class="edit__not-found">
       <img src="../assets/illustration/illustration404.svg" alt="">
-      <p>{{ error.message }}</p>
     </div>
     <transition name="fade">
       <div class="popup" v-if="isDisplayPopup" @click="hiddenPopup()">
-        <p v-if="error.isError" class="popup__text_red">{{ error.message }}</p>
-        <p v-else class="popup__text">Create Todo Successfully</p>
+        <p v-if="error.isErrorEdit" class="popup__text_red">{{ error.messageEdit }}</p>
+        <p v-else class="popup__text">{{ messageSuccess }}</p>
       </div>
     </transition>
   </div>
@@ -52,8 +51,11 @@ export default {
       isDisplayPopup: false,
       error: {
         message: '',
-        isError: false
-      }
+        isError: false,
+        messageEdit: '',
+        isErrorEdit: false
+      },
+      messageSuccess: ''
     }
   },
   methods: {
@@ -68,11 +70,32 @@ export default {
           }
         })
         .catch((err) => {
-          console.log(err)
+          this.error.message = err
+          this.error.isError = true
         })
     },
     hiddenPopup () {
       this.isDisplayPopup = false
+      this.$router.push('/')
+    },
+    hendleTodoSave () {
+      const data = {
+        title: this.todo.title,
+        description: this.todo.description,
+        priority: this.todo.priority,
+        isCompleted: this.todo.isCompleted
+      }
+
+      TodoService.editTodo(this.todo.id, data)
+        .then((result) => {
+          this.messageSuccess = result.data.message
+          this.isDisplayPopup = true
+        })
+        .catch((err) => {
+          this.error.messageEdit = err
+          this.error.isErrorEdit = true
+          this.isDisplayPopup = true
+        })
     }
   },
   mounted () {

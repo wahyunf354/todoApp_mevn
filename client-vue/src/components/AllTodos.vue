@@ -9,6 +9,9 @@
     <div class="empty__text" v-if="isEmpty">
       <p>Todo Not Found</p>
     </div>
+    <div class="empty__text" v-if="error">
+      <p>{{ error }}</p>
+    </div>
   </div>
 </template>
 
@@ -21,7 +24,8 @@ export default {
   data () {
     return {
       todos: [],
-      isEmpty: false
+      isEmpty: false,
+      error: ''
     }
   },
   components: {
@@ -40,6 +44,7 @@ export default {
         })
         .catch(err => {
           console.log(err)
+          this.error = err
         })
     },
     handleDeleteTodo (id) {
@@ -59,22 +64,9 @@ export default {
 </script>
 
 <style lang="scss">
-.alltodo__content {
-    flex: 1;
-    .title {
-      p {
-        font-family: Poppins;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 24px;
-        line-height: 36px;
-        color: white;
-        margin-bottom: 33px;
-      }
-    }
-  }
-@media screen and (max-width: 768px) {
+
   .alltodo__content {
+  flex:1;
     .title {
       p {
         font-family: Poppins;
@@ -87,5 +79,23 @@ export default {
       }
     }
   }
-}
+  .error__text {
+    flex: 1
+  }
+
+@media screen and (max-width: 768px) {
+    .alltodo__content {
+      .title {
+        p {
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 24px;
+          line-height: 36px;
+          color: white;
+          margin-bottom: 33px;
+        }
+      }
+    }
+  }
 </style>
